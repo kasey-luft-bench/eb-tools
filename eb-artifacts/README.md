@@ -1,4 +1,4 @@
-## Generates EB artifact
+# eb-artifacts
 
 Script to generate necessary artifacts for Elastic Beanstalk setup, including:
 
@@ -7,7 +7,7 @@ Script to generate necessary artifacts for Elastic Beanstalk setup, including:
 
 Existing files in `.ebextensions` folder can be used as an example, but you don't need to include them by default.
 
-### Usage
+## Usage
 
     > ./generate_eb_artifacts.py -h
     usage: generate_eb_artifacts.py [-h] --name NAME --version VERSION
@@ -46,7 +46,7 @@ Existing files in `.ebextensions` folder can be used as an example, but you don'
       --output OUTPUT       Output directory, default: "output".
 
 
-### Examples
+## Examples
 
 > $ ./generate_eb_artifacts.py --name 'something' --version '189-04b80b4' --registry YOUR_REGISTRY_URL
 
