@@ -1,2 +1,3 @@
 # eb-tools
-AWS Elastic Beanstalk Tools
+
+Collection of AWS Elastic Beanstalk tools we use at Bench.
