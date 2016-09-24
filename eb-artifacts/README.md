@@ -9,8 +9,8 @@ Existing files in `.ebextensions` folder can be used as an example, but you don'
 
 ## Usage
 
-    > ./generate_eb_artifacts.py -h
-    usage: generate_eb_artifacts.py [-h] --name NAME --version VERSION
+    > ./eb-artifacts.py -h
+    usage: eb-artifacts.py [-h] --name NAME --version VERSION
                                     [--container-port CONTAINER_PORT]
                                     [--port-mappings [PORT_MAPPINGS [PORT_MAPPINGS ...]]]
                                     [--mount-points [MOUNT_POINTS [MOUNT_POINTS ...]]]
@@ -48,8 +48,8 @@ Existing files in `.ebextensions` folder can be used as an example, but you don'
 
 ## Examples
 
-> $ ./generate_eb_artifacts.py --name 'something' --version '189-04b80b4' --registry YOUR_REGISTRY_URL
+> $ ./eb-artifacts.py --name 'something' --version '189-04b80b4' --registry YOUR_REGISTRY_URL
 
-> $ ./generate_eb_artifacts.py --name 'something' --version '189-04b80b4' --extensions-filter '0[1-3]*' --registry YOUR_REGISTRY_URL
+> $ ./eb-artifacts.py --name 'something' --version '189-04b80b4' --extensions-filter '0[1-3]*' --registry YOUR_REGISTRY_URL
 
-> $ ./generate_eb_artifacts.py --name 'something' --version '189-04b80b4' --container-port 8080 --log-path /mnt-logs/logs --mount-points /mnt-bla/upload /mnt-logs/logs --registry YOUR_REGISTRY_URL
+> $ ./eb-artifacts.py --name 'something' --version '189-04b80b4' --container-port 8080 --log-path /mnt-logs/logs --mount-points /mnt-bla/upload /mnt-logs/logs --registry YOUR_REGISTRY_URL
