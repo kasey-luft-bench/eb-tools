@@ -1,0 +1,33 @@
+AWSConfigurationTemplateVersion: 1.1.0.0
+EnvironmentTier: {Name: WebServer, Type: Standard}
+OptionSettings:
+- {Namespace: 'aws:elb:policies', OptionName: ConnectionDrainingEnabled, Value: 'True'}
+- {Namespace: 'aws:elb:policies', OptionName: ConnectionSettingIdleTimeout, Value: '600'}
+- {Namespace: 'aws:elasticbeanstalk:application', OptionName: Application Healthcheck URL,
+    Value: /api/heartbeat}
+- {Namespace: 'aws:elasticbeanstalk:managedactions', OptionName: PreferredStartTime,
+    Value: 'sat:01:30'}
+- {Namespace: 'aws:elasticbeanstalk:managedactions', OptionName: ManagedActionsEnabled,
+    Value: 'True'}
+- {Namespace: 'aws:elb:loadbalancer', OptionName: LoadBalancerHTTPSPort, Value: '443'}
+- {Namespace: 'aws:elb:loadbalancer', OptionName: CrossZone, Value: 'True'}
+- {Namespace: 'aws:elasticbeanstalk:healthreporting:system', OptionName: SystemType,
+    Value: enhanced}
+- {Namespace: 'aws:autoscaling:asg', OptionName: MinSize, Value: '2'}
+- {Namespace: 'aws:elasticbeanstalk:environment', OptionName: ServiceRole,
+    Value: aws-elasticbeanstalk-service-role}
+- {Namespace: 'aws:elasticbeanstalk:command', OptionName: BatchSizeType, Value: Fixed}
+- {Namespace: 'aws:elasticbeanstalk:command', OptionName: DeploymentPolicy, Value: Rolling}
+- {Namespace: 'aws:elasticbeanstalk:command', OptionName: BatchSize, Value: '1'}
+- {Namespace: 'aws:autoscaling:updatepolicy:rollingupdate:autoscaling:trigger', OptionName: RollingUpdateEnabled,
+    Value: 'True'}
+- {Namespace: 'aws:autoscaling:updatepolicy:rollingupdate:autoscaling:trigger', OptionName: RollingUpdateType,
+    Value: Health}
+- {Namespace: 'aws:elasticbeanstalk:managedactions:platformupdate', OptionName: UpdateLevel,
+    Value: minor}
+- {Namespace: 'aws:elasticbeanstalk:application:environment', OptionName: EB_MICROSERVICE,
+    Value: 'true'}
+- {Namespace: 'aws:autoscaling:launchconfiguration', OptionName: IamInstanceProfile,
+    Value: ecsInstanceRole}
+- {Namespace: 'aws:autoscaling:launchconfiguration', OptionName: EC2KeyName, Value: bench-production}
+SolutionStack: 64bit Amazon Linux 2016.03 v2.1.3 running Multi-container Docker 1.11.1 (Generic)
