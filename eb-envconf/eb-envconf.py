@@ -49,8 +49,25 @@ def create_apps(client, applications):
             client.create_application(ApplicationName=application)
 
 
+def latest_stack(client):
+    stacks = client.list_available_solution_stacks()['SolutionStacks']
+    multidocker = [x for x in stacks if x.find('Multi-container Docker') >= 0]
+    return multidocker[0]
+
+
+def create_sg(ec2, application):
+    try:
+        ec2.describe_security_groups(GroupNames=[application])
+    except ClientError as e:
+        if e.response['Error']['Code'] != 'InvalidGroup.NotFound':
+            raise e
+        print("security group %s missing, so creating..." % application)
+        ec2.create_security_group(GroupName=application, Description='new SG for ' + application)
+
+
 def update_create_template(client, application, prefix, config):
     template_name = prefix + "-" + application
+    stackname = latest_stack(client)
     try:
         print("Updating config template", template_name)
         client.update_configuration_template(ApplicationName=application, TemplateName=template_name,
@@ -60,6 +77,7 @@ def update_create_template(client, application, prefix, config):
             raise e
         print("Template missing, so creating new template: ", template_name)
         client.create_configuration_template(ApplicationName=application, TemplateName=template_name,
+                                             SolutionStackName=stackname,
                                              OptionSettings=config['OptionSettings'])
     return template_name
 
@@ -126,8 +144,10 @@ def main():
 
     client = boto3.client('elasticbeanstalk')
     create_apps(client, args.applications)
+    ec2 = boto3.client('ec2')
 
     for application in args.applications:
+        create_sg(ec2, application)
         for prefix in args.prefixes:
             version = get_version(client, application)
             config = get_config(application, prefix, version, args)

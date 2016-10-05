@@ -11,6 +11,7 @@ OptionSettings:
     Value: 'True'}
 - {Namespace: 'aws:elb:loadbalancer', OptionName: LoadBalancerHTTPSPort, Value: '443'}
 - {Namespace: 'aws:elb:loadbalancer', OptionName: CrossZone, Value: 'True'}
+- {Namespace: 'aws:elb:loadbalancer', OptionName: SSLCertificateId, Value: 'YOUR_SSL_CERTIFICATE_ARN'}
 - {Namespace: 'aws:elasticbeanstalk:healthreporting:system', OptionName: SystemType,
     Value: enhanced}
 - {Namespace: 'aws:autoscaling:asg', OptionName: MinSize, Value: '2'}
